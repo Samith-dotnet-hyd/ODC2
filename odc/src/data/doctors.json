@@ -1,0 +1,50 @@
+[
+  {
+    "id": 1,
+    "name": "Dr. Rohan Kapoor",
+    "specialization": "Cardiologist",
+    "rating": 4.5,
+    "fee": 500,
+    "image": "https://randomuser.me/api/portraits/men/32.jpg"
+  },
+  {
+    "id": 2,
+    "name": "Dr. Maya Patel",
+    "specialization": "Dermatologist",
+    "rating": 4.9,
+    "fee": 400,
+    "image": "https://randomuser.me/api/portraits/women/44.jpg"
+  },
+  {
+    "id": 3,
+    "name": "Dr. Anika Shah",
+    "specialization": "Cardiologist",
+    "rating": 4.8,
+    "fee": 700,
+    "image": "https://randomuser.me/api/portraits/women/65.jpg"
+  },
+  {
+    "id": 4,
+    "name": "Dr. Rehul Verma",
+    "specialization": "Dentist",
+    "rating": 4.6,
+    "fee": 700,
+    "image": "https://randomuser.me/api/portraits/men/21.jpg"
+  },
+  {
+    "id": 5,
+    "name": "Dr. Anika Shan",
+    "specialization": "Cardiologist",
+    "rating": 4.7,
+    "fee": 600,
+    "image": "https://randomuser.me/api/portraits/women/52.jpg"
+  },
+  {
+    "id": 6,
+    "name": "Dr. Riya Menon",
+    "specialization": "Dermatologist",
+    "rating": 4.8,
+    "fee": 500,
+    "image": "https://randomuser.me/api/portraits/women/74.jpg"
+  }
+]

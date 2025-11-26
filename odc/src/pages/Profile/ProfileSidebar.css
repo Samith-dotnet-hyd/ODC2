@@ -1,0 +1,32 @@
+.profile-sidebar {
+  width: 240px;
+  background: #ffffff;
+  padding: 20px;
+  border-right: 1px solid #e5e5e5;
+  height: calc(100vh - 80px);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.profile-sidebar button {
+  width: 100%;
+  padding: 12px;
+  border-radius: 8px;
+  border: none;
+  background: #f3f6ff;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.profile-sidebar button.active {
+  background: #3b82f6;
+  color: white;
+  font-weight: 600;
+}
+
+.logout-btn {
+  margin-top: auto;
+  background: #ef4444 !important;
+  color: white !important;
+}

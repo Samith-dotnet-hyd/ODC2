@@ -1,0 +1,50 @@
+.dashboard {
+  padding: 30px 40px;
+}
+
+.dashboard h1 span {
+  color: #2d72f4;
+}
+
+.icon-row {
+  margin-top: 30px;
+  display: flex;
+  gap: 20px;
+}
+
+.vital-section {
+  margin-top: 40px;
+}
+.appointment-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 per row */
+  gap: 24px;
+  max-height: 500px; /* Adjust as needed */
+  overflow-y: auto;  /* vertical scroll */
+  padding-right: 10px;
+}
+
+.appointment-list::-webkit-scrollbar {
+  width: 8px;
+}
+
+.appointment-list::-webkit-scrollbar-thumb {
+  background: #c7d7ff;
+  border-radius: 10px;
+}
+
+.appointment-list::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+@media (max-width: 900px) {
+  .appointment-list {
+    grid-template-columns: repeat(2, 1fr); /* 2 per row */
+  }
+}
+
+@media (max-width: 600px) {
+  .appointment-list {
+    grid-template-columns: 1fr; /* 1 per row (full width) */
+  }
+}
+

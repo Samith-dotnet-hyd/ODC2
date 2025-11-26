@@ -1,0 +1,12 @@
+.doctor-listing {
+  display: flex;
+  padding: 20px 40px;
+  gap: 25px;
+}
+
+.doctor-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 25px;
+  flex: 1;
+}

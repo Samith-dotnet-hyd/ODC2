@@ -1,0 +1,28 @@
+.doctor-card {
+  padding: 20px;
+  background: #fff;
+  border-radius: 14px;
+  text-align: center;
+  box-shadow: 0 3px 12px rgba(0,0,0,0.07);
+}
+
+.doctor-card img {
+  width: 85px;
+  height: 85px;
+  border-radius: 50%;
+}
+
+.price-rating {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+}
+
+.doctor-card button {
+  width: 100%;
+  padding: 10px;
+  background: #2d72f4;
+  color: white;
+  border-radius: 10px;
+  border: none;
+}

@@ -1,0 +1,25 @@
+.profile-home {
+  padding: 40px;
+}
+.profile-container {
+  display: flex;
+  width: 100%;
+}
+
+.profile-content {
+  flex: 1;
+  padding: 30px;
+  overflow-y: auto;
+}
+
+.profile-home button {
+  display: block;
+  margin-top: 20px;
+  padding: 12px 20px;
+  width: 200px;
+  background: #2d72f4;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
