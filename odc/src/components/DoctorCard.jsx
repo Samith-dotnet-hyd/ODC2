@@ -6,22 +6,19 @@ import { useNavigate } from "react-router-dom";
 export default function DoctorCard({ doctor }) {
   const navigate = useNavigate();
 
-  const { addAppointment } = useContext(AppContext);
-
-const handleClick = () => {
-  addAppointment(doctor);
-  navigate("/");
-};
+  const handleClick = () => {
+    navigate(`/book/${doctor.doctorId}`);
+  };
 
   return (
     <div className="doctor-card">
       <img src={doctor.image} alt="doc" />
 
-      <h3>{doctor.name}</h3>
+      <h3>{doctor.firstName}</h3>
       <p>{doctor.specialization}</p>
 
       <div className="price-rating">
-        <p>₹ {doctor.fee}</p>
+        <p>₹ {doctor.consultationFee }</p>
         <span>⭐ {doctor.rating}</span>
       </div>
 

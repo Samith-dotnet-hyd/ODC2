@@ -7,7 +7,7 @@ export default function FilterSidebar({ updateFilter }) {
 
       <h3>Specialization</h3>
       <div className="filter-chip" onClick={() => updateFilter("specialization", "Cardiologist")}>
-        Cardiologist
+        cardiologist
       </div>
       <div className="filter-chip" onClick={() => updateFilter("specialization", "Dermatologist")}>
         Dermatologist

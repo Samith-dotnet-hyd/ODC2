@@ -3,11 +3,11 @@ import "./DoctorListing.css";
 import DoctorCard from "../components/DoctorCard";
 import FilterSidebar from "../components/FilterSidebar";
 import axios from "axios";
-
+import Navbar from "../components/Navbar";
 export default function DoctorListing() {
   const [filters, setFilters] = useState({
-    specialization: "",
-    availability: "",
+    Specialization: "",
+    // availability: "",
     consultation: "",
     price: ""
   });
@@ -21,22 +21,34 @@ export default function DoctorListing() {
  
 
 // load once initially
-  const fetchDoctors = async () => {
-    try {
-      const response = await axios.get("http://localhost:5062/api/doctors", {
+ const fetchDoctors = async () => {
+  try {
+    const hasFilters =
+      filters.specialization ||
+      filters.consultation ||
+      filters.price;
+
+    let response;
+
+    if (!hasFilters) {
+      // No filters → get ALL doctors
+      response = await axios.get("http://localhost:5108/api/doctors");
+    } else {
+      // Filters applied → call /filter endpoint
+      response = await axios.get("http://localhost:5108/api/doctors/filter", {
         params: {
-          specialization: filters.specialization || "",
-          availability: filters.availability || "",
-          consultation: filters.consultation || "",
-          price: filters.price || ""
+          Specialization: filters.specialization,
+          Consultation: filters.consultation,
+          Price: filters.price
         }
       });
-
-      setDoctors(response.data);
-    } catch (error) {
-      console.error("Error fetching doctors:", error);
     }
-  };
+
+    setDoctors(response.data);
+  } catch (error) {
+    console.error("Error fetching doctors:", error);
+  }
+};
 
  // Fetch doctors when filters change
   useEffect(() => {
@@ -44,7 +56,11 @@ export default function DoctorListing() {
   }, [filters]);
 
   return (
+    <>
+        <Navbar/>
     <div className="doctor-listing">
+           
+      
       <FilterSidebar updateFilter={updateFilter} />
 
       <div className="doctor-grid">
@@ -57,5 +73,6 @@ export default function DoctorListing() {
         )}
       </div>
     </div>
+    </>
   );
 }

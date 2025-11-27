@@ -4,10 +4,11 @@ import Sidebar from "./ProfileSidebar";
 import ProfileDetails from "./ProfileDetails";
 import ProfileSettings from "./ProfileSettings";
 import axios from "axios";
+import Navbar from "../../components/Navbar";
 export default function Profile() {
   const [activeTab, setActiveTab] = useState("details");
   const [userData, setUserData] = useState(null);
-  const userId = "4"; // <- replace with real logged-in user ID
+  const userId = "7"; // <- replace with real logged-in user ID
 
   useEffect(() => {
     if (activeTab === "details") {
@@ -17,7 +18,7 @@ export default function Profile() {
 
   const fetchProfile = async () => {
     try {
-      const res = await axios.get(`https://localhost:7243/api/Patients/${userId}`);
+      const res = await axios.get(`http://localhost:5138/api/Patients/${userId}`);
 
 
       setUserData(res.data); // profile exists
@@ -30,7 +31,11 @@ export default function Profile() {
   };
 
   return (
+    <>
+    <Navbar/>
     <div className="profile-container">
+      
+      
       <Sidebar activeTab={activeTab} setActiveTab={setActiveTab} />
 
       <div className="profile-content">
@@ -43,5 +48,6 @@ export default function Profile() {
         )}
       </div>
     </div>
+    </>
   );
 }

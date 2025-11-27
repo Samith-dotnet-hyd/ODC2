@@ -1,0 +1,71 @@
+/* Main container */
+.schedule-container {
+  width: 80%;
+  margin: 0 auto;
+  padding: 25px 0;
+}
+
+.schedule-title {
+  text-align: center;
+  font-size: 28px;
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+
+.no-data {
+  text-align: center;
+  font-size: 18px;
+  color: #777;
+}
+
+/* Day card */
+.day-card {
+  background: #ffffff;
+  border-radius: 14px;
+  margin-bottom: 28px;
+  padding: 20px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+}
+
+.day-header {
+  margin-bottom: 15px;
+}
+
+.slots-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Slot */
+.hour-slot {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 18px;
+  border-radius: 10px;
+  font-size: 16px;
+  background: #f4f6f8;
+  transition: 0.2s;
+}
+
+.hour-slot.free {
+  border-left: 5px solid #2ecc71;
+}
+
+.hour-slot.booked {
+  background: #b7cae2;
+  border-left: 5px solid #164aaa;
+}
+
+.hour-slot.blocked {
+  background: #fff7da;
+  border-left: 5px solid #f1c40f;
+}
+
+.slot-hour {
+  font-weight: 600;
+}
+
+.slot-status {
+  opacity: 0.8;
+}

@@ -1,0 +1,47 @@
+.slot-wrapper {
+  padding: 20px;
+}
+
+.date-picker {
+  padding: 10px;
+  margin-right: 10px;
+}
+
+.fetch-btn {
+  padding: 10px 20px;
+  background: #1e78f0;
+  color: white;
+  border: none;
+  border-radius: 6px;
+}
+
+.slot-grid {
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 15px;
+}
+
+.slot-box {
+  padding: 15px;
+  border-radius: 8px;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.available { 
+  background: #c8ffc8;   /* green */ 
+  border: 2px solid #22bb33;
+}
+
+.busy { 
+  background: #ffe6cc;  /* orange */ 
+  border: 2px solid #ff9900;
+}
+
+.booked { 
+  background: #ffb7b7;   /* red */ 
+  border: 2px solid #ff3333;
+}
+

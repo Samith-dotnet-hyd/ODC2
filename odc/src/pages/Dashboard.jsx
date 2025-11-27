@@ -4,12 +4,16 @@ import { AppContext } from "../context/AppContext";
 import AppointmentCard from "../components/AppointmentCard";
 import IconCard from "../components/IconCard";
 import VitalChart from "../components/VitalChart";
+import Navbar from "../components/Navbar";
 
 export default function Dashboard() {
   const { user, appointments } = useContext(AppContext);
 
   return (
+    <>
+        <Navbar/>
     <div className="dashboard">
+      
       <h1>Hello, <span>{user.name}</span></h1>
 
       <div className="appointment-list">
@@ -31,5 +35,6 @@ export default function Dashboard() {
         <VitalChart />
       </div>
     </div>
+    </>
   );
 }
