@@ -1,37 +1,41 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
 import "./ProfileDetails.css";
+import api from "../../api";
+import { usePatient } from "../../context/PatientContext";
 
-export default function ProfileDetails({ userData, userId, fetchProfile }) {
+export default function ProfileDetails({ userData, userId }) {
+  const { setPatientData } = usePatient();
 
-  // Create profile fields (full DTO)
-  const emptyForm = {
-    UserId: userId,
-    FirstName: "",
-    LastName: "",
-    Phone: "",
-    Email: "",
-    PassHash: "",
-    DateOfBirth: "",
-    MedicalHistory: "",
-    Allergies: "",
-    BloodGroup: ""
-  };
+  const [form, setForm] = useState({
+    firstName: "",
+    lastName: "",
+    phone: "",
+    email: "",
+    dateOfBirth: "",
+    medicalHistory: "",
+    allergies: "",
+    bloodGroup: "",
+    insuranceProvider: "",
+    insuranceNumber: ""
+  });
 
-  const [form, setForm] = useState(emptyForm);
-
-  // Load profile data
+  // Load context data into form
   useEffect(() => {
-    if (!userData) {
-      setForm(emptyForm);
-      return;
-    }
+    if (!userData) return;
 
     setForm({
-      ...userData,
-      DateOfBirth: userData.dateOfBirth
+      firstName: userData.firstName || "",
+      lastName: userData.lastName || "",
+      email: userData.email || "",
+      phone: userData.phone || "",
+      dateOfBirth: userData.dateOfBirth
         ? userData.dateOfBirth.split("T")[0]
-        : ""
+        : "",
+      medicalHistory: userData.medicalHistory || "",
+      allergies: userData.allergies || "",
+      bloodGroup: userData.bloodGroup || "",
+      insuranceProvider: userData.insuranceProvider || "",
+      insuranceNumber: userData.insuranceNumber || ""
     });
   }, [userData]);
 
@@ -39,144 +43,107 @@ export default function ProfileDetails({ userData, userId, fetchProfile }) {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  // ------------------------ CREATE ------------------------
-  const handleCreate = async () => {
+  // Refresh global profile after update
+  const refreshProfile = async () => {
     try {
-      await axios.post("https://localhost:7243/api/Patients", form);
-      alert("Profile created successfully");
-      fetchProfile();
+      const res = await api.get(`/patients/${userId}`);
+      setPatientData(res.data); // update global context
     } catch (err) {
-      console.error(err);
-      alert("Failed to create profile");
+      console.error("Error refreshing updated profile", err);
     }
   };
 
-  // ------------------------ UPDATE ------------------------
+  // Update profile in DB
   const handleUpdate = async () => {
-    const updatePayload = {
-      Phone: form.Phone,
-      MedicalHistory: form.MedicalHistory,
-      Allergies: form.Allergies,
-      BloodGroup: form.BloodGroup,
-      InsuranceProvider: form.InsuranceProvider || "",
-      InsuranceNumber: form.InsuranceNumber || ""
-    };
-
     try {
-      await axios.put(`https://localhost:7243/api/Patients/${userId}`, updatePayload);
-      alert("Profile updated successfully");
-      fetchProfile();
+      await api.put(`/patients/${userId}`, form);
+      alert("Profile updated!");
+      await refreshProfile();
     } catch (err) {
       console.error(err);
       alert("Failed to update profile");
     }
   };
 
-  const isNew = userData === null;
-
   return (
     <div className="profile-details">
-
-      <h2>{isNew ? "Create Profile" : "Update Profile"}</h2>
+      <h2>My Profile</h2>
 
       <div className="form-grid">
-
-        {/* CREATE FIELDS (ignore during update) */}
         <input
-          name="FirstName"
-          value={form.FirstName || ""}
+          name="firstName"
+          value={form.firstName}
           placeholder="First Name"
           onChange={handleChange}
-          disabled={!isNew}
         />
 
         <input
-          name="LastName"
-          value={form.LastName || ""}
+          name="lastName"
+          value={form.lastName}
           placeholder="Last Name"
           onChange={handleChange}
-          disabled={!isNew}
         />
 
         <input
-          name="Email"
-          value={form.Email || ""}
+          name="email"
+          value={form.email}
           placeholder="Email"
           onChange={handleChange}
-          disabled={!isNew}
-        />
-
-        <input
-          name="PassHash"
-          value={form.PassHash || ""}
-          placeholder="Password Hash"
-          onChange={handleChange}
-          disabled={!isNew}
         />
 
         <input
           type="date"
-          name="DateOfBirth"
-          value={form.DateOfBirth || ""}
+          name="dateOfBirth"
+          value={form.dateOfBirth}
           onChange={handleChange}
-          disabled={!isNew}
         />
 
-        {/* UPDATE + CREATE FIELDS */}
         <input
-          name="Phone"
-          value={form.Phone || ""}
+          name="phone"
+          value={form.phone}
           placeholder="Phone"
           onChange={handleChange}
         />
 
         <textarea
-          name="MedicalHistory"
-          value={form.MedicalHistory || ""}
+          name="medicalHistory"
+          value={form.medicalHistory}
           placeholder="Medical History"
           onChange={handleChange}
         />
 
         <textarea
-          name="Allergies"
-          value={form.Allergies || ""}
+          name="allergies"
+          value={form.allergies}
           placeholder="Allergies"
           onChange={handleChange}
         />
 
         <input
-          name="BloodGroup"
-          value={form.BloodGroup || ""}
+          name="bloodGroup"
+          value={form.bloodGroup}
           placeholder="Blood Group"
           onChange={handleChange}
         />
 
-        {/* Optional Insurance fields */}
         <input
-          name="InsuranceProvider"
-          value={form.InsuranceProvider || ""}
+          name="insuranceProvider"
+          value={form.insuranceProvider}
           placeholder="Insurance Provider"
           onChange={handleChange}
         />
 
         <input
-          name="InsuranceNumber"
-          value={form.InsuranceNumber || ""}
+          name="insuranceNumber"
+          value={form.insuranceNumber}
           placeholder="Insurance Number"
           onChange={handleChange}
         />
-
       </div>
 
-      {isNew ? (
-        <button className="save-btn" onClick={handleCreate}>
-          Create Profile
-        </button>
-      ) : (
-        <button className="save-btn" onClick={handleUpdate}>
-          Update Profile
-        </button>
-      )}
+      <button className="save-btn" onClick={handleUpdate}>
+        Update Profile
+      </button>
     </div>
   );
 }

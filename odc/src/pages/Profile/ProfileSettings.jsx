@@ -8,9 +8,9 @@ export default function ProfileSettings() {
     <div>
       <h2>Settings</h2>
 
-      <button className="save-btn" onClick={toggleTheme}>
+      {/* <button className="save-btn" onClick={toggleTheme}>
         Switch to {theme === "light" ? "Dark" : "Light"} Theme
-      </button>
+      </button> */}
     </div>
   );
 }

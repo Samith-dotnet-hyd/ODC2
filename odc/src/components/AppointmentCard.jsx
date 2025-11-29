@@ -1,24 +1,50 @@
 import "./AppointmentCard.css";
+import { useNavigate } from "react-router-dom";
 
-export default function AppointmentCard({ doctor }) {
+export default function AppointmentCard({ appointment }) {
+  const navigate = useNavigate();
+
+  // Format date & time
+  const date = new Date(appointment.appointmentDateTime);
+  const formattedDate = date.toLocaleDateString("en-GB");   // dd/mm/yyyy
+  const formattedTime = date.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+
+  const handleViewDetails = () => {
+    navigate(`/dashboard/appointment/${appointment.appointmentId}`);
+  };
+
   return (
     <div className="appointment-card-new">
       <div className="left-section">
-        <img src={doctor.image} alt="doctor" className="doctor-photo" />
+
+        {/* Static placeholder image */}
+        <img 
+          src="https://via.placeholder.com/80" 
+          alt="doctor" 
+          className="doctor-photo"
+        />
 
         <div className="info">
-          <p className="label">Upcoming Consultation</p>
+          <p className="label">{appointment.status}</p>
 
-          <h2 className="doctor-name">{doctor.name}</h2>
-          <p className="specialization">{doctor.specialization}</p>
+          <h2 className="doctor-name">Doctor #{appointment.doctorId}</h2>
+
+          <p className="specialization">
+            Notes: {appointment.notes || "No additional notes"}
+          </p>
 
           <div className="time-box">
-            <span>10:00 AM • Today</span>
+            <span>{formattedTime} • {formattedDate}</span>
           </div>
         </div>
       </div>
 
-      <button className="join-btn">Join Video Call</button>
+      <button 
+        className="join-btn"
+        onClick={handleViewDetails}
+      >
+        View Details
+      </button>
     </div>
   );
 }

@@ -14,7 +14,7 @@ export default function Navbar() {
         src="https://randomuser.me/api/portraits/men/32.jpg"
         alt="profile"
         className="navbar-profile"
-        onClick={() => navigate("/profile")}
+        onClick={() => navigate("/dashboard/profile")}
         style={{ cursor: "pointer" }}
       />
     </div>

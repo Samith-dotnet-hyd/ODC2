@@ -7,7 +7,7 @@ export default function DoctorCard({ doctor }) {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate(`/book/${doctor.doctorId}`);
+    navigate(`/dashboard/book/${doctor.doctorId}`);
   };
 
   return (

@@ -27,6 +27,22 @@
 .appointment-list::-webkit-scrollbar {
   width: 8px;
 }
+.history-btn {
+  margin: 20px 0;
+  padding: 12px 20px;
+  background: #2f6df1;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.history-btn:hover {
+  background: #1e4ac0;
+}
 
 .appointment-list::-webkit-scrollbar-thumb {
   background: #c7d7ff;

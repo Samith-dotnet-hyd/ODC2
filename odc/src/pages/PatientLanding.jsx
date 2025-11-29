@@ -42,38 +42,32 @@ const Button = styled.button`
 `;
 
 export default function PatientLanding() {
-  const [patientId, setPatientId] = useState("");
-  const { setPatient } = usePatient();
+  const [inputId, setInputId] = useState("");
+  const { setPatientId, setPatientData } = usePatient();
   const navigate = useNavigate();
 
-  const fetchPatient = async () => {
-    try {
-      const res = await fetch(`http://localhost:5138/api/Patients/${patientId}`);
-
-      if (!res.ok) {
-        alert("Patient not found!");
-        return;
-      }
-
-      const data = await res.json();
-      setPatient(data);
-
-      navigate("/dashboard");
-    } catch (error) {
-      alert("Server error!");
+  const handleContinue = () => {
+    if (!inputId.trim()) {
+      alert("Please enter a valid patient ID");
+      return;
     }
+
+    setPatientId(inputId);     // store ID globally
+    setPatientData(null);      // clear previous patient's data
+
+    navigate("/dashboard");    // dashboard will fetch fresh data
   };
 
   return (
     <Container>
       <Box>
         <h2>Enter Patient ID</h2>
-        <Input 
+        <Input
           placeholder="Patient ID"
-          value={patientId}
-          onChange={(e) => setPatientId(e.target.value)}
+          value={inputId}
+          onChange={(e) => setInputId(e.target.value)}
         />
-        <Button onClick={fetchPatient}>Continue</Button>
+        <Button onClick={handleContinue}>Continue</Button>
       </Box>
     </Container>
   );

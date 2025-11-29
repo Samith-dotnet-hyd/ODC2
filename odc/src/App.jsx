@@ -9,12 +9,8 @@ import { DoctorProvider } from "./context/DoctorContext";
 import BookAppointment from "./doctorpages/BookAppointment";
 import { PatientProvider } from "./context/PatientContext";
 import PatientLanding from "./pages/PatientLanding";
-<Routes>
-  {/* other routes */}
-
-  <Route path="/book/:doctorId" element={<BookAppointment />} />
-</Routes>
-
+import HistoryPage from "./pages/HistoryPage";
+import AppointmentDetails from "./pages/AppointmentDetails";
 import DoctorDashboard from "./doctorpages/DoctorDashboard";
 import AppointmentsPage from "./doctorpages/AppointmentsPage";
 import LandingPage from "./doctorpages/LandingPage";
@@ -30,12 +26,16 @@ const App = () => {
         
         <Routes>
           <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/doctors" element={<DoctorListing />} />
-          <Route path="/profile" element={<Profile  />} />
-            <Route path="/book/:doctorId" element={<BookAppointment />} />
+          <Route path="/dashboard/doctors" element={<DoctorListing />} />
+          <Route path="/dashboard/profile" element={<Profile  />} />
+            <Route path="/dashboard/book/:doctorId" element={<BookAppointment />} />
 <Route path="/patient" element={<PatientLanding />} />
-
-<Route path="/profile/create" element={<CreateProfile />} />
+<Route path="/dashboard/history" element={<HistoryPage />} />
+<Route
+  path="/dashboard/appointment/:appointmentId"
+  element={<AppointmentDetails />}
+/>
+<Route path="/dashboard/profile/create" element={<CreateProfile />} />
 <Route path="/" element={<LandingPage />} />
           <Route path="/doctordashboard" element={<DoctorDashboard />} />
           <Route path="/doctordashboard/profile" element={<DoctorProfile />} />
