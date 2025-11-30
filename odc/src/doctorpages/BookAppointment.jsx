@@ -2,11 +2,12 @@ import { useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import "./slots.css";
-
+import { useNavigate } from "react-router-dom";
+import Navbar from "../components/Navbar";
 export default function BookAppointment() {
   // Get doctorId from URL
   const { doctorId } = useParams();
-
+const navigate = useNavigate();
   const [selectedDate, setSelectedDate] = useState("");
   const [slots, setSlots] = useState(null);
 const handleSlotClick = async (hour, value) => {
@@ -14,7 +15,7 @@ const handleSlotClick = async (hour, value) => {
   // 0 = busy (not available)
   // 1 = available
   // 2 = booked
-
+  
   if (value === 0) {
     alert("Doctor is not available at this time.");
     return;
@@ -92,7 +93,17 @@ const handleSlotClick = async (hour, value) => {
   };
 
   return (
+    <>
+    <div className="back-btn-wrapper">
+            <button className="back-btn" onClick={() => navigate("/dashboard/doctors")}>
+              ← Back 
+            </button>
+          </div>
+          
+    {/* <Navbar /> */}
+          
     <div className="slot-wrapper">
+      
       <h2>Booking for Doctor {doctorId}</h2>
 
       <input
@@ -120,9 +131,9 @@ const handleSlotClick = async (hour, value) => {
         <div
           key={key}
           className={`slot-box ${
-            value === 0 ? "available" :
-            value === 1 ? "booked" :
-            "closed"
+            value === 0 ? "closed" :
+            value === 1 ? "available" :
+            "booked"
           }`}
           onClick={() => {  console.log("CLICKED SLOT", hour, value);  // 👈 add this
 handleSlotClick(hour, value)}}
@@ -136,5 +147,6 @@ handleSlotClick(hour, value)}}
 
 
     </div>
+    </>
   );
 }

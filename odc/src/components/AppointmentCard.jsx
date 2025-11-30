@@ -19,7 +19,8 @@ export default function AppointmentCard({ appointment }) {
 
         {/* Static placeholder image */}
         <img 
-          src="https://via.placeholder.com/80" 
+          // src="https://via.placeholder.com/80" 
+          src="https://ui-avatars.com/api/?name=Doctor&background=random"
           alt="doctor" 
           className="doctor-photo"
         />

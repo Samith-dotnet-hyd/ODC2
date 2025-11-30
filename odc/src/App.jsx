@@ -16,7 +16,7 @@ import AppointmentsPage from "./doctorpages/AppointmentsPage";
 import LandingPage from "./doctorpages/LandingPage";
 import DoctorProfile from "./doctorpages/DoctorProfile";
 import CalendarPage from "./doctorpages/CalendarPage";
-
+import Prescriptions from "./pages/Prescriptions";
 const App = () => {
   return (
     <AppProvider>
@@ -35,6 +35,8 @@ const App = () => {
   path="/dashboard/appointment/:appointmentId"
   element={<AppointmentDetails />}
 />
+<Route path="/dashboard/prescriptions" element={<Prescriptions />} />
+
 <Route path="/dashboard/profile/create" element={<CreateProfile />} />
 <Route path="/" element={<LandingPage />} />
           <Route path="/doctordashboard" element={<DoctorDashboard />} />

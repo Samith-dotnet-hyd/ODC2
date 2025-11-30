@@ -1,0 +1,225 @@
+/* ===============================
+   MAIN CONTAINER
+================================*/
+.appt-container {
+  padding: 40px;
+  max-width: 1200px;
+  margin: auto;
+  font-family: "Inter", sans-serif;
+  color: #1d1d1f;
+}
+
+.appt-title {
+  font-size: 34px;
+  font-weight: 700;
+  margin-bottom: 30px;
+}
+
+
+/* ===============================
+   GRID LAYOUT
+================================*/
+.appt-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 35px;
+}
+
+@media (max-width: 900px) {
+  .appt-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+/* ===============================
+   DOCTOR CARD (LEFT)
+================================*/
+.appt-doctor-card {
+  background: linear-gradient(135deg, #d9ecff, #e9fff7);
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.appt-doctor-photo {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid #fff;
+  margin-bottom: 15px;
+}
+
+.appt-doctor-name {
+  font-size: 24px;
+  margin: 8px 0;
+}
+
+.appt-spec {
+  font-size: 16px;
+  opacity: 0.7;
+}
+
+.appt-doc-info {
+  margin-top: 20px;
+  text-align: left;
+  background: #fff;
+  padding: 15px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.appt-doc-info p {
+  margin: 6px 0;
+  font-size: 15px;
+}
+
+
+/* ===============================
+   BUTTONS (CALL + MESSAGE)
+================================*/
+.appt-btn-call, 
+.appt-btn-msg {
+  width: 100%;
+  padding: 12px;
+  margin-top: 15px;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  border-radius: 10px;
+  font-weight: 600;
+  transition: 0.2s;
+}
+
+.appt-btn-call {
+  background: #0bab6b;
+  color: #fff;
+}
+
+.appt-btn-call:hover {
+  background: #0a9c60;
+}
+
+.appt-btn-msg {
+  background: #1e77ff;
+  color: white;
+}
+
+.appt-btn-msg:hover {
+  background: #1666e0;
+}
+
+
+/* ===============================
+   APPOINTMENT DETAILS CARD (RIGHT)
+================================*/
+.appt-details-card {
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 30px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+}
+
+.appt-details-card h3 {
+  margin-bottom: 12px;
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.appt-details-card p {
+  margin: 10px 0;
+  font-size: 16px;
+}
+
+
+/* ===============================
+   STATUS BADGES
+================================*/
+.appt-status {
+  padding: 8px 14px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 600;
+  display: inline-block;
+  margin-bottom: 10px;
+}
+
+.appt-status.scheduled {
+  background: #e1f0ff;
+  color: #0066cc;
+}
+
+.appt-status.completed {
+  background: #e2ffe4;
+  color: #009b4d;
+}
+
+.appt-status.cancelled {
+  background: #ffe4e4;
+  color: #cc0000;
+}
+
+
+/* ===============================
+   CANCEL BUTTON
+================================*/
+.appt-btn-cancel {
+  margin-top: 20px;
+  width: 100%;
+  padding: 14px;
+  border-radius: 10px;
+  border: none;
+  background: #ff4d4d;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.appt-btn-cancel:hover {
+  background: #e63939;
+}
+
+
+/* ===============================
+   BOTTOM NAVIGATION BUTTONS
+================================*/
+.appt-bottom-actions {
+  margin-top: 40px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.appt-btn-back,
+.appt-btn-book {
+  padding: 12px 20px;
+  font-size: 16px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.25s;
+}
+
+.appt-btn-back {
+  background: #f0f0f0;
+  color: #333;
+}
+
+.appt-btn-back:hover {
+  background: #e0e0e0;
+}
+
+.appt-btn-book {
+  background: #1e77ff;
+  color: #fff;
+}
+
+.appt-btn-book:hover {
+  background: #1666e0;
+}

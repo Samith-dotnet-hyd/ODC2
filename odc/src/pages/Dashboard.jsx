@@ -94,7 +94,7 @@ setPatientData({
 
         <div className="icon-row">
           <IconCard title="My Health Records" icon="📄" />
-          <IconCard title="Prescriptions" icon="💊" />
+          <IconCard title="Prescriptions" icon="💊" link="/dashboard/prescriptions" />
           <IconCard title="Book Appointment" icon="📅" link="/dashboard/doctors" />
           <IconCard title="Messages" icon="💬" />
         </div>

@@ -6,20 +6,27 @@ export default function ProfileSidebar({ activeTab, setActiveTab }) {
   const navigate = useNavigate();
   const { setPatientId, setPatientData } = usePatient();
 
-  const handleLogout = () => {
-    // Clear context
-    setPatientId(null);
-    setPatientData(null);
+ const handleLogout = () => {
+  const confirmLogout = window.confirm("Are you sure you want to sign out?");
 
-    // Clear localStorage (if persistence is used)
-    localStorage.removeItem("patientId");
+  if (!confirmLogout) return;
 
-    // Redirect to landing page
-    navigate("/patient");
-  };
+  // Clear context
+  setPatientId(null);
+  setPatientData(null);
+
+  // Clear localStorage
+  localStorage.removeItem("patientId");
+
+  // Redirect to landing page
+  navigate("/patient");
+};
+
 
   return (
     <div className="profile-sidebar">
+        
+      {/* </div> */}
       <button
         className={activeTab === "details" ? "active" : ""}
         onClick={() => setActiveTab("details")}
@@ -33,7 +40,9 @@ export default function ProfileSidebar({ activeTab, setActiveTab }) {
       >
         Settings
       </button>
-
+{/* <button className="back-btn" onClick={() => navigate("/dashboard")}>
+          ← Back to Dashboard
+        </button> */}
       <button className="logout-btn" onClick={handleLogout}>
         Sign Out
       </button>

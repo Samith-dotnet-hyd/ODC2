@@ -34,7 +34,7 @@ export default function FilterSidebar({ updateFilter ,filters }) {
       <div className="filter-chip" onClick={() => updateFilter("specialization", "Dermatologist")}>
         Dermatologist
       </div> */}
-<h3>Specialization</h3>
+{/* <h3>Specialization</h3>
 
 <div 
   className={`filter-chip ${filters.specialization === "Cardiologist" ? "active" : ""}`}
@@ -48,7 +48,24 @@ export default function FilterSidebar({ updateFilter ,filters }) {
   onClick={() => updateFilter("specialization", "Dermatologist")}
 >
   Dermatologist
-</div>
+</div> */}
+<h3>Specialization</h3>
+<select
+  className="filter-select"
+  onChange={(e) => updateFilter("specialization", e.target.value)}
+>
+  <option value="">All</option>
+  <option value="Cardiologist">Cardiologist</option>
+  <option value="Dermatologist">Dermatologist</option>
+  <option value="Neurologist">Neurologist</option>
+  <option value="Pediatrician">Pediatrician</option>
+  <option value="Orthopedic Surgeon">Orthopedic Surgeon</option>
+  <option value="Gynecologist">Gynecologist</option>
+  <option value="Psychiatrist">Psychiatrist</option>
+  <option value="ENT Specialist">ENT Specialist</option>
+  <option value="General Physician">General Physician</option>
+</select>
+
 
       {/* EXPERIENCE */}
       <h3>Minimum Experience (Years)</h3>

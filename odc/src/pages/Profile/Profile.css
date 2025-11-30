@@ -23,3 +23,21 @@
   border-radius: 10px;
   cursor: pointer;
 }
+.back-btn {
+  background: none;
+  border: none;
+  font-size: 1.1rem;
+  cursor: pointer;
+  color: #2f6df1;
+  font-weight: 600;
+  padding: 8px 0;
+  transition: 0.2s;
+}
+
+.back-btn:hover {
+  color: #1743b3;
+  transform: translateX(-3px);
+}
+.back-btn-wrapper {
+  margin: 0px 40px;
+}
