@@ -15,38 +15,48 @@ export default function AppointmentDetails() {
 
   // Load appointment from context OR API
   useEffect(() => {
-    const id = Number(appointmentId);
+  const id = Number(appointmentId);
 
-    // Check in context first
-    if (patientData?.appointments?.length > 0) {
-      const found = patientData.appointments.find(a => a.appointmentId === id);
-      if (found) {
-        setAppointment(found);
-        return;
-      }
+  // 1️⃣ Check already loaded appointments in context
+  if (patientData?.appointments?.length > 0) {
+    const found = patientData.appointments.find(a => a.appointmentId === id);
+    if (found) {
+      setAppointment(found);
+      return;
     }
+  }
 
-    // Otherwise fetch from API
-    const fetchAppts = async () => {
-      try {
-        const res = await fetch(
-          `http://localhost:5004/api/Appointement/patient/${patientId}?page=1&pageSize=20`
-        );
-        const data = await res.json();
+  // 2️⃣ Otherwise fetch fresh from backend
+  const fetchAppts = async () => {
+    try {
+      const res = await fetch(
+        `http://localhost:5004/api/Appointement/patient/${patientId}?page=1&pageSize=20`
+      );
 
-        const list = data.past || [];
+      const data = await res.json();
 
-        setPatientData(prev => ({ ...prev, appointments: list }));
+      // BACKEND NOW RETURNS { past: [...], future: [...] }
+      const merged = [
+        ...(data.past || []),
+        ...(data.future || [])
+      ];
 
-        const found = list.find(a => a.appointmentId === id);
-        setAppointment(found || null);
-      } catch (err) {
-        console.error("Error:", err);
-      }
-    };
+      // Save merged list in global patient context
+      setPatientData(prev => ({
+        ...prev,
+        appointments: merged
+      }));
 
-    fetchAppts();
-  }, [appointmentId, patientId]);
+      const found = merged.find(a => a.appointmentId === id);
+      setAppointment(found || null);
+
+    } catch (err) {
+      console.error("Error fetching appointments:", err);
+    }
+  };
+
+  fetchAppts();
+}, [appointmentId, patientId]);
 
   // Fetch doctor details
   useEffect(() => {

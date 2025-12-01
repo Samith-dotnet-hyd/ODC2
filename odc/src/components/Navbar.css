@@ -1,4 +1,4 @@
-.navbar {
+/* .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -12,4 +12,49 @@
   height: 42px;
   border-radius: 50%;
   object-fit: cover;
+} */.navbar {
+  width: 100%;
+  height: 70px;
+  padding: 0 20px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  background: white;
+  border-bottom: 1px solid #eee;
+
+  box-sizing: border-box;
+  overflow-x: hidden; /* prevents horizontal scroll */
+}
+
+.navbar-left {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+}
+
+.navbar-link {
+  font-size: 16px;
+  font-weight: 500;
+  color: #444;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.navbar-link:hover {
+  color: #1e73ff;
+}
+
+.navbar-profile {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  cursor: pointer;
+  object-fit: cover;
+  border: 2px solid #ddd;
+}
+
+body {
+  overflow-x: hidden !important; /* FULL FIX */
 }
