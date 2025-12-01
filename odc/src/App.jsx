@@ -17,6 +17,7 @@ import LandingPage from "./doctorpages/LandingPage";
 import DoctorProfile from "./doctorpages/DoctorProfile";
 import CalendarPage from "./doctorpages/CalendarPage";
 import Prescriptions from "./pages/Prescriptions";
+import ConfirmBooking from "./pages/ConfirmBooking";
 const App = () => {
   return (
     <AppProvider>
@@ -36,6 +37,7 @@ const App = () => {
   element={<AppointmentDetails />}
 />
 <Route path="/dashboard/prescriptions" element={<Prescriptions />} />
+< Route path= "/dashboard/book/:doctorId/confirm" element={ <ConfirmBooking /> }/>
 
 <Route path="/dashboard/profile/create" element={<CreateProfile />} />
 <Route path="/" element={<LandingPage />} />

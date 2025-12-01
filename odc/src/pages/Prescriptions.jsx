@@ -3,14 +3,14 @@ import { usePatient } from "../context/PatientContext";
 import api from "../api";
 import "./Prescriptions.css";
 import axios from "axios";
-
+import { useNavigate } from "react-router-dom";
 export default function Prescriptions() {
   const { patientId } = usePatient();
 
   const [prescriptions, setPrescriptions] = useState([]);
   const [doctorMap, setDoctorMap] = useState({}); // doctorId → doctor details
   const [loading, setLoading] = useState(true);
-
+ const navigate = useNavigate();
  const downloadPdf = async (pdfUrl, fileName) => {
   try {
     const response = await axios.get(pdfUrl, {
@@ -73,7 +73,15 @@ export default function Prescriptions() {
   if (loading) return <h2>Loading prescriptions...</h2>;
 
   return (
-    <div className="prescription-container">
+       
+       <>
+       <div className="back-btn-wrapper">
+        <button className="back-btn" onClick={() => navigate("/dashboard")}>
+          ← Back to Dashboard
+        </button>
+      </div>
+       <div className="prescription-container">
+    
       <h1 className="title">Your Prescriptions</h1>
 
       {prescriptions.length === 0 ? (
@@ -117,9 +125,13 @@ export default function Prescriptions() {
 
               </div>
             </div>
+            
           );
         })
       )}
     </div>
+       </>
+    
+    
   );
 }

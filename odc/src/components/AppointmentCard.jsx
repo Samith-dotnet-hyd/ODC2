@@ -28,7 +28,7 @@ export default function AppointmentCard({ appointment }) {
         <div className="info">
           <p className="label">{appointment.status}</p>
 
-          <h2 className="doctor-name">Doctor #{appointment.doctorId}</h2>
+          <h2 className="doctor-name">Appointment Id{appointment.appointmentId}</h2>
 
           <p className="specialization">
             Notes: {appointment.notes || "No additional notes"}
