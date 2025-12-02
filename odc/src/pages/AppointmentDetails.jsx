@@ -81,7 +81,7 @@ const handleCancel = async () => {
   useEffect(() => {
     if (appointment?.doctorId) {
       api
-        .get(`/doctor/${appointment.doctorId}`)
+        .get(`/doctors  /${appointment.doctorId}`)
         .then(res => setDoctor(res.data))
         .catch(err => console.error(err));
     }

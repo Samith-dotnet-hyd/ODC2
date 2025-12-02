@@ -1,6 +1,13 @@
 .slot-wrapper {
   padding: 20px;
 }
+.past-slot {
+  background: #ddd;
+  color: #999;
+  cursor: not-allowed;
+  pointer-events: none;
+  border: 1px solid #ccc;
+}
 
 .date-picker {
   padding: 10px;
