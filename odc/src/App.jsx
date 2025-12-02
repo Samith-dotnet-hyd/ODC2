@@ -23,6 +23,8 @@ import Register from "./pages/Pregisterpage";
 import { AuthProvider } from "./context/AuthContext.jsx";
 import ProtectedRoute from "./routes/ProtectedRoute";
 import Unauthorized from "./pages/Unauthorized.jsx";
+import AddPrescription from "./doctorpages/AddPrescription.jsx";
+import DoctorLogin from "./pages/DoctorLogin.jsx";
 
 const App = () => {
   return (
@@ -135,16 +137,63 @@ const App = () => {
 {/* PUBLIC ROUTES */}
 <Route path="/patient" element={<PatientLanding />} />
 <Route path="/login" element={<Login />} />
+<Route path="/doctorlogin" element={<DoctorLogin />} />
+
 <Route path="/register" element={<Register />} />
 <Route path="/unauthorized" element={<Unauthorized />} />
-
+{/* <ProtectedRoute role="doctor"></ProtectedRoute> */}
 <Route path="/" element={<LandingPage />} />
-          <Route path="/doctordashboard" element={<ProtectedRoute role="doctor">
+
+{/* 🔐 DOCTOR DASHBOARD ROUTES (ROLE = doctor) */}
+<Route
+  path="/doctordashboard"
+  element={
+    <ProtectedRoute role="doctor">
       <DoctorDashboard />
-    </ProtectedRoute>} />
-          <Route path="/doctordashboard/profile" element={<DoctorProfile />} />
-          <Route path="/doctordashboard/appointments" element={<AppointmentsPage />} />
-          <Route path="/doctordashboard/calendar" element={<CalendarPage />} />
+    </ProtectedRoute>
+  }
+/>
+
+<Route
+  path="/doctordashboard/profile"
+  element={
+    <ProtectedRoute role="doctor">
+      <DoctorProfile />
+    </ProtectedRoute>
+  }
+/>
+
+<Route
+  path="/doctordashboard/appointments"
+  element={
+    <ProtectedRoute role="doctor">
+      <AppointmentsPage />
+    </ProtectedRoute>
+  }
+/>
+
+<Route
+  path="/doctordashboard/calendar"
+  element={
+    <ProtectedRoute role="doctor">
+      <CalendarPage />
+    </ProtectedRoute>
+  }
+/>
+
+{/* Add Prescription (doctor only) */}
+<Route
+  path="/add-prescription/:appointmentId"
+  element={
+    <ProtectedRoute role="doctor">
+      <AddPrescription />
+    </ProtectedRoute>
+  }
+/>
+
+{/* Unauthorized page */}
+<Route path="/unauthorized" element={<Unauthorized />} />
+
         </Routes>
         </AuthProvider>
       </BrowserRouter>

@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
+import api from "../api";
 import { useDoctor } from "../context/DoctorContext";
+
 
 const HeaderBar = styled.div`
   background: #1e78f0;
@@ -11,10 +13,20 @@ const HeaderBar = styled.div`
   justify-content: space-between;
   align-items: center;
   border-radius:10px;
-
   position: sticky;
   top: 0;
   z-index: 1000;
+`;
+
+const NavBtn = styled.div`
+  margin: 0 12px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: 0.2s;
+
+  &:hover {
+    text-decoration: underline;
+  }
 `;
 
 const ProfileSection = styled.div`
@@ -30,27 +42,31 @@ const Img = styled.img`
   object-fit: cover;
   margin-right: 10px;
   border: 2px solid white;
-  transition: 0.3s;
-
-  &:hover {
-    transform: scale(1.05);
-  }
-`;
-
-const NavBtn = styled.div`
-  margin: 0 12px;
-  cursor: pointer;
-  font-weight: 500;
-  transition: 0.2s;
-
-  &:hover {
-    text-decoration: underline;
-  }
 `;
 
 export default function DashboardHeader() {
   const navigate = useNavigate();
-  const { doctor } = useDoctor();
+  const { doctor, setDoctor,doctorId, setDoctorId } = useDoctor();
+
+  // Load doctor details AFTER login
+useEffect(() => {
+  const load = async () => {
+    if (!doctorId) return;  // wait for id
+
+    try {
+      const res = await api.get(`/doctors/${doctorId}`);
+      setDoctor(res.data);
+    } catch (err) {
+      console.log("Doctor load error:", err);
+    }
+  };
+
+  load();
+}, [doctorId]);
+
+  
+if (!doctor.doctorId) return <p>Loading...</p>;
+if (!doctor) return <p>Loading profile...</p>;// avoid rendering before data available
 
   return (
     <HeaderBar>
@@ -62,7 +78,7 @@ export default function DashboardHeader() {
         <NavBtn onClick={() => navigate("/doctordashboard/calendar")}>My Calendar</NavBtn>
 
         <ProfileSection onClick={() => navigate("/doctordashboard/profile")}>
-          <Img src={doctor.Image || "/default-profile.png"} />
+          <Img src={doctor.image || "/default-profile.png"} />
         </ProfileSection>
       </div>
     </HeaderBar>

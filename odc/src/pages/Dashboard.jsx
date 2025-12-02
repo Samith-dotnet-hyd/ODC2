@@ -23,15 +23,15 @@ export default function Dashboard() {
         const patientRes = await api.get(`/patients/${patientId}`);
 
         // 2️⃣ Fetch appointments (direct microservice)
-//         const appointmentsRes = await api.get(`/appointments/patient/${patientId}`, {
-//   params: { page: 1, pageSize: 20 }
-// });
-const appointmentsRes = await axios.get(
-  `http://localhost:5004/api/Appointment/patient/${patientId}`,
-  {
-    params: { page: 1, pageSize: 20 }
-  }
-);
+        const appointmentsRes = await api.get(`/appointments/patient/${patientId}`, {
+  params: { page: 1, pageSize: 20 }
+});
+// const appointmentsRes = await axios.get(
+//   `http://localhost:5004/api/Appointment/patient/${patientId}`,
+//   {
+//     params: { page: 1, pageSize: 20 }
+//   }
+// );
 
 
 const appointments = appointmentsRes.data;  // ✔ correct
