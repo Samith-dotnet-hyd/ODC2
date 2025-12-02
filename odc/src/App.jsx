@@ -25,7 +25,7 @@ import ProtectedRoute from "./routes/ProtectedRoute";
 import Unauthorized from "./pages/Unauthorized.jsx";
 import AddPrescription from "./doctorpages/AddPrescription.jsx";
 import DoctorLogin from "./pages/DoctorLogin.jsx";
-
+import MediConnectLanding from "./ladingpages/ladpage.jsx";
 const App = () => {
   return (
     <AppProvider>
@@ -137,12 +137,13 @@ const App = () => {
 {/* PUBLIC ROUTES */}
 <Route path="/patient" element={<PatientLanding />} />
 <Route path="/login" element={<Login />} />
+<Route path="/land" element={< LandingPage/>} />
 <Route path="/doctorlogin" element={<DoctorLogin />} />
 
 <Route path="/register" element={<Register />} />
 <Route path="/unauthorized" element={<Unauthorized />} />
 {/* <ProtectedRoute role="doctor"></ProtectedRoute> */}
-<Route path="/" element={<LandingPage />} />
+<Route path="/" element={<MediConnectLanding />} />
 
 {/* 🔐 DOCTOR DASHBOARD ROUTES (ROLE = doctor) */}
 <Route

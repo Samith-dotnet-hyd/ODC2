@@ -41,31 +41,38 @@ const appointments = appointmentsRes.data;  // ✔ correct
         // { past: [...], future: [...] }
 
         const future = appointments.future || [];
-        const past = appointments.past || [];
+const past = appointments.past || [];
 
-        // 🔥 Sort order: Scheduled → Completed → Cancelled
-        const statusOrder = {
-          "Scheduled": 1,
-          "Completed": 2,
-          "Cancelled": 3
-        };
+// Extract by status
+const futureScheduled = future.filter(a => a.status === "Scheduled");
+const futureCompleted = future.filter(a => a.status === "Completed");
+const futureCancelled = future.filter(a => a.status === "Cancelled");
 
-        const sortByStatus = (a, b) => {
-          return statusOrder[a.status] - statusOrder[b.status];
-        };
+// Upcoming = ONLY Scheduled
+const upcoming = [...futureScheduled];
 
-        // 🚀 UPCOMING = future only + status sorting
-        const upcoming = future.sort(sortByStatus);
+// History = backend past + completed + cancelled
+const history = [...past, ...futureCompleted, ...futureCancelled];
 
-        // 🕒 HISTORY = past only + status sorting
-        const history = past.sort(sortByStatus);
+// Sort order for display
+const statusOrder = {
+  "Scheduled": 1,
+  "Completed": 2,
+  "Cancelled": 3
+};
 
-        // 3️⃣ Save into context
-        setPatientData({
-          ...patientRes.data,
-          upcomingAppointments: upcoming,
-          pastAppointments: history,
-        });
+const sortByStatus = (a, b) => statusOrder[a.status] - statusOrder[b.status];
+
+upcoming.sort(sortByStatus);
+history.sort(sortByStatus);
+
+// Save to context
+setPatientData({
+  ...patientRes.data,
+  upcomingAppointments: upcoming,
+  pastAppointments: history,
+});
+
 
       } catch (error) {
         console.error("Error fetching dashboard data:", error);
@@ -121,11 +128,11 @@ const appointments = appointmentsRes.data;  // ✔ correct
         >
           View Appointment History
         </button>
-        {/* VITAL SIGNS */}
+        {/* VITAL SIGNS
         <div className="vital-section">
           <h2>Vital Signs</h2>
           <VitalChart />
-        </div>
+        </div> */}
 
       </div>
     </>
