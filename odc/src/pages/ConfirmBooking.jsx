@@ -224,35 +224,67 @@ const handleConfirm = async () => {
     await handlePayment();
 
     // Update slot
-    await api.post(
-      "http://localhost:5171/api/DoctorSlots/book",
-      { date, hour: Number(slot) },
-      { params: { doctorId: Number(doctorId) } }
-    );
+//     await api.post(
+//       "http://localhost:5171/api/DoctorSlots/book",
+//       { date, hour: Number(slot) },
+//       { params: { doctorId: Number(doctorId) } }
+//     );
 
-    // Create Appointment
-    const appointmentRes = await api.post(
-      "http://localhost:5004/api/Appointement/CreateAppointment",
-      {
-        doctorId: Number(doctorId),
-        patientId,
-        appointmentDateTime,
-        createdAt: new Date().toISOString(),
-        status: "Scheduled",
-        notes: notes || "No notes",
-      }
-    );
+//     // Create Appointment
+//     const appointmentRes = await api.post(
+//       "http://localhost:5004/api/Appointment/CreateAppointment",
+//       {
+//         doctorId: Number(doctorId),
+//         patientId,
+//         appointmentDateTime,
+//         createdAt: new Date().toISOString(),
+//         status: "Scheduled",
+//         notes: notes || "No notes",
+//       }
+//     );
 
-    const appointmentId = appointmentRes.data.appointmentId;
+//     const appointmentId = appointmentRes.data.appointmentId;
+// // patientData?.email
+//     // Send Email
+//     await api.post("https://localhost:7096/api/Notification/send-email", {
+//       toEmail: patientData?.email,
+//       toPhone: patientData?.phone || "",
+//       subject: "Appointment Confirmation",
+//       message: `
+// Hello ${patientData?.firstName},
+await api.post(
+  "/doctorslots/book",
+  { 
+    date, 
+    hour: Number(slot) 
+  },
+  { 
+    params: { doctorId: Number(doctorId) } 
+  }
+);
+
+// 3️⃣ Create Appointment (via Ocelot)
+const appointmentRes = await api.post(
+  "/appointments/create",
+  {
+    doctorId: Number(doctorId),
+    patientId,
+    appointmentDateTime,
+    createdAt: new Date().toISOString(),
+    status: "Scheduled",
+    notes: notes || "No notes",
+  }
+);
+
+const appointmentId = appointmentRes.data.appointmentId;
 // patientData?.email
-    // Send Email
-    await api.post("https://localhost:7096/api/Notification/send-email", {
-      toEmail: "samithreddykandala@gmail.com",
-      toPhone: patientData?.phone || "",
-      subject: "Appointment Confirmation",
-      message: `
+// 4️⃣ Send Email (via Ocelot)
+await api.post("/notification/send-email", {
+  toEmail: patientData?.email,
+  toPhone: patientData?.phone || "",
+  subject: "Appointment Confirmation",
+  message: `
 Hello ${patientData?.firstName},
-
 Your appointment has been successfully booked.
 
 ✔ Appointment ID: ${appointmentId}

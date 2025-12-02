@@ -7,6 +7,7 @@ import VitalChart from "../components/VitalChart";
 import Navbar from "../components/Navbar";
 import api from "../api";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 export default function Dashboard() {
   const { patientId, patientData, setPatientData } = usePatient();
@@ -22,11 +23,19 @@ export default function Dashboard() {
         const patientRes = await api.get(`/patients/${patientId}`);
 
         // 2️⃣ Fetch appointments (direct microservice)
-        const appointmentsRes = await fetch(
-          `http://localhost:5004/api/Appointement/patient/${patientId}?page=1&pageSize=20`
-        );
+//         const appointmentsRes = await api.get(`/appointments/patient/${patientId}`, {
+//   params: { page: 1, pageSize: 20 }
+// });
+const appointmentsRes = await axios.get(
+  `http://localhost:5004/api/Appointment/patient/${patientId}`,
+  {
+    params: { page: 1, pageSize: 20 }
+  }
+);
 
-        const appointments = await appointmentsRes.json();
+
+const appointments = appointmentsRes.data;  // ✔ correct
+
 
         // NEW RESPONSE FORMAT:
         // { past: [...], future: [...] }

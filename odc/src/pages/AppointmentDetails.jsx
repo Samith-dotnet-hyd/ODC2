@@ -12,6 +12,25 @@ export default function AppointmentDetails() {
 
   const [appointment, setAppointment] = useState(null);
   const [doctor, setDoctor] = useState(null);
+const handleCancel = async () => {
+  const confirmCancel = window.confirm("Are you sure you want to cancel this appointment?");
+  if (!confirmCancel) return;
+
+  try {
+    // Hit Ocelot gateway → appointment service
+    await api.put(`/appointments/update/${appointment.appointmentId}`, {
+      status: "Cancelled",
+      notes: appointment.notes || "Cancelled by patient"
+    });
+
+    alert("Appointment cancelled successfully!");
+    navigate("/dashboard");
+  } catch (err) {
+    console.error("Cancel error:", err);
+    alert("Failed to cancel appointment");
+  }
+};
+
 
   // Load appointment from context OR API
   useEffect(() => {
@@ -30,7 +49,7 @@ export default function AppointmentDetails() {
   const fetchAppts = async () => {
     try {
       const res = await fetch(
-        `http://localhost:5004/api/Appointement/patient/${patientId}?page=1&pageSize=20`
+        `http://localhost:5004/api/Appointment/patient/${patientId}?page=1&pageSize=20`
       );
 
       const data = await res.json();
@@ -127,8 +146,11 @@ export default function AppointmentDetails() {
           <p><b>Appointment ID:</b> #{appointment.appointmentId}</p>
 
           {appointment.status === "Scheduled" && (
-            <button className="appt-btn-cancel">Cancel Appointment</button>
-          )}
+  <button className="appt-btn-cancel" onClick={handleCancel}>
+    Cancel Appointment
+  </button>
+)}
+
         </div>
       </div>
 
