@@ -275,7 +275,7 @@ const appointmentRes = await api.post(
     notes: notes || "No notes",
   }
 );
-
+ 
 const appointmentId = appointmentRes.data.appointmentId;
 // patientData?.email
 // 4️⃣ Send Email (via Ocelot)

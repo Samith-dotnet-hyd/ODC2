@@ -26,6 +26,8 @@ import Unauthorized from "./pages/Unauthorized.jsx";
 import AddPrescription from "./doctorpages/AddPrescription.jsx";
 import DoctorLogin from "./pages/DoctorLogin.jsx";
 import MediConnectLanding from "./ladingpages/ladpage.jsx";
+import PatientVideoPage from "./pages/PatientVideoPage.jsx";
+import DoctorVideoPage from "./pages/DoctorVideoPage.jsx";
 const App = () => {
   return (
     <AppProvider>
@@ -133,7 +135,14 @@ const App = () => {
     </ProtectedRoute>
   }
 />
-
+<Route
+  path="/patientvideopage"
+  element={
+    <ProtectedRoute role="patient">
+      <PatientVideoPage />
+    </ProtectedRoute>
+  }
+/>
 {/* PUBLIC ROUTES */}
 <Route path="/patient" element={<PatientLanding />} />
 <Route path="/login" element={<Login />} />
@@ -154,7 +163,14 @@ const App = () => {
     </ProtectedRoute>
   }
 />
-
+<Route
+  path="/doctorvideopage"
+  element={
+    <ProtectedRoute role="doctor">
+      <DoctorVideoPage />
+    </ProtectedRoute>
+  }
+/>
 <Route
   path="/doctordashboard/profile"
   element={

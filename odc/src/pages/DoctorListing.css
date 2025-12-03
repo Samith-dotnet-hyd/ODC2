@@ -10,3 +10,7 @@
   gap: 25px;
   flex: 1;
 }
+/* Completely restore browser defaults inside this wrapper */
+.all-revert {
+  all: revert !important;
+}

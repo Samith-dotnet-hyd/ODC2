@@ -1,0 +1,236 @@
+/* src/styles/video.css */
+
+/* Root layout */
+.vs-root {
+  display: flex;
+  gap: 20px;
+  padding: 20px;
+  box-sizing: border-box;
+  width: 100%;
+  min-height: calc(100vh - 40px);
+  background: linear-gradient(180deg, #f6f9fb 0%, #f3f6f9 100%);
+  align-items: flex-start;
+  justify-content: center;
+}
+
+/* Main card */
+.vs-card {
+  flex: 1.6;
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 18px;
+  box-shadow: 0 8px 30px rgba(16, 24, 40, 0.06);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-width: 320px;
+}
+
+/* Header */
+.vs-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.vs-user {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.vs-avatar {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: linear-gradient(135deg,#1976d2,#4dabf7);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 16px;
+  box-shadow: 0 6px 18px rgba(16,24,40,0.08);
+}
+
+.vs-meta .vs-title {
+  font-weight: 700;
+  font-size: 18px;
+  color: #0b2545;
+}
+.vs-meta .vs-sub {
+  font-size: 12px;
+  color: #7b8a9a;
+}
+
+/* Actions */
+.vs-actions {
+  display:flex;
+  gap: 12px;
+  align-items:center;
+}
+
+.vs-status {
+  font-size: 13px;
+  color: #2d3b4f;
+}
+
+/* Buttons look */
+.vs-join-btn, .vs-end-btn, .vs-outline-btn {
+  padding: 8px 14px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  text-transform: none;
+}
+
+/* primary join */
+.vs-join-btn {
+  background: linear-gradient(90deg, #1976d2, #1e90ff);
+  color: #fff;
+  box-shadow: 0 8px 20px rgba(30,144,255,0.18);
+}
+
+/* end button */
+.vs-end-btn {
+  background: linear-gradient(90deg, #ff6b6b, #ff3b30);
+  color: #fff;
+  box-shadow: 0 8px 20px rgba(255,59,48,0.14);
+}
+
+/* outline look */
+.vs-outline-btn {
+  background: white;
+  border: 1px solid rgba(16,24,40,0.06);
+  color: #0b2545;
+}
+
+/* video area */
+.vs-video-area {
+  border-radius: 14px;
+  overflow: hidden;
+  min-height: 320px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fafafa;
+  border: 1px solid rgba(16,24,40,0.04);
+  box-shadow: inset 0 -2px 8px rgba(0,0,0,0.02);
+}
+
+.vs-jitsi {
+  width: 100%;
+  height: 100%;
+}
+
+.vs-loading {
+  color: #6b7280;
+  font-size: 16px;
+}
+
+/* controls row */
+.vs-controls {
+  display:flex;
+  gap: 12px;
+  align-items:center;
+  margin-top: 6px;
+  padding-top: 6px;
+}
+
+.vs-room {
+  margin-left: auto;
+  color: #6b7280;
+  font-size: 13px;
+}
+.vs-room-val {
+  color: #0b2545;
+  font-weight: 600;
+  margin-left: 6px;
+}
+
+/* right side (chat + files) */
+.vs-side {
+  width: 360px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  min-width: 280px;
+}
+
+/* panels */
+.vs-panel {
+  background: white;
+  border-radius: 14px;
+  padding: 14px;
+  box-shadow: 0 8px 24px rgba(16,24,40,0.04);
+  border: 1px solid rgba(16,24,40,0.03);
+}
+
+/* titles */
+.panel-title {
+  margin: 0 0 8px 0;
+  font-size: 18px;
+  font-weight: 700;
+  color: #0b2545;
+}
+
+/* people details */
+.vs-people {
+  margin-top: 12px;
+  color: #42526e;
+  font-size: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* modal */
+.vs-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(10,20,30,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1400;
+}
+.vs-modal {
+  max-width: 760px;
+  width: 96%;
+  background: white;
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 20px 50px rgba(16,24,40,0.4);
+}
+
+/* responsive */
+@media (max-width: 1100px) {
+  .vs-root {
+    padding: 12px;
+  }
+  .vs-side {
+    width: 320px;
+  }
+}
+
+@media (max-width: 860px) {
+  .vs-root {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 12px;
+  }
+
+  .vs-card {
+    order: 1;
+  }
+
+  .vs-side {
+    order: 2;
+    width: 100%;
+  }
+
+  .vs-video-area {
+    min-height: 360px;
+  }
+}

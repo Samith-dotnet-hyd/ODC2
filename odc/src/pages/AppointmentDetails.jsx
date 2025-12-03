@@ -12,6 +12,38 @@ export default function AppointmentDetails() {
 
   const [appointment, setAppointment] = useState(null);
   const [doctor, setDoctor] = useState(null);
+  const handleStartCall = async () => {
+  try {
+    const res = await axios.post("https://localhost:7128/api/Video/create-session", {
+      appointmentId: appointment.appointmentId,
+      doctorId: Number(appointment.doctorId),
+      patientId: appointment.patientId,
+      scheduledStart: new Date().toISOString(),
+      jitsiBaseUrl: "https://meet.jit.si"
+    });
+
+    console.log("Video Session Created:", res.data);
+
+    // navigate with created session data
+    navigate("/patientvideopage", {
+      state: {
+        appointmentId: appointment.appointmentId,
+        patientId: appointment.patientId,
+        doctorId: appointment.doctorId,
+
+        // session data you got from backend
+        sessionId: res.data.sessionId,
+        roomName: res.data.roomName,
+        displayName: appointment.patientName
+      }
+    });
+
+  } catch (err) {
+    console.error("Create session error:", err);
+    alert("Failed to start video session");
+  }
+};
+
 const handleCancel = async () => {
   const confirmCancel = window.confirm("Are you sure you want to cancel this appointment?");
   if (!confirmCancel) return;
@@ -81,7 +113,7 @@ const handleCancel = async () => {
   useEffect(() => {
     if (appointment?.doctorId) {
       api
-        .get(`/doctors  /${appointment.doctorId}`)
+        .get(`/doctors/${appointment.doctorId}`)
         .then(res => setDoctor(res.data))
         .catch(err => console.error(err));
     }
@@ -130,7 +162,7 @@ const handleCancel = async () => {
             <p>Fee: <b>₹{doctor?.consultationFee}</b></p>
           </div>
 
-          <button className="appt-btn-call">📞 Call Now</button>
+          <button onClick={handleStartCall} className="appt-btn-call">📞 Call Now</button>
           <button className="appt-btn-msg">💬 Message</button>
         </div>
 

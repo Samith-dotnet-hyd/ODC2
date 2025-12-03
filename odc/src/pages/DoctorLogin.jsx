@@ -59,7 +59,16 @@ export default function DoctorLogin() {
 
   return (
     <div className="auth-container">
+       <button
+  className="absolute top-6 left-6 text-teal-600 hover:text-teal-500 transition-all"
+  onClick={() => navigate("/")}
+>
+  ← Back
+</button>
+
       <div className="auth-card">
+     
+
         <h2>Doctor Login</h2>
 
         {error && <p className="auth-error">{error}</p>}

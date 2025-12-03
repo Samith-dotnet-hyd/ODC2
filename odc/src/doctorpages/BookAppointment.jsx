@@ -9,6 +9,7 @@ export default function BookAppointment() {
 
   const [selectedDate, setSelectedDate] = useState("");
   const [slots, setSlots] = useState(null);
+  const [noSlots, setNoSlots] = useState(false); // NEW → show "no slots available"
 
   const prettyTime = (index) => index.toString().padStart(2, "0") + ":00";
 
@@ -19,23 +20,20 @@ export default function BookAppointment() {
     const today = new Date();
     const selected = new Date(selectedDate);
 
-    // Compare dates without time
     const todayDateOnly = new Date(today.toDateString());
     const selectedDateOnly = new Date(selected.toDateString());
 
-    // If selected date is before today → block all slots
     if (selectedDateOnly < todayDateOnly) return true;
 
-    // If today AND hour is before or equal to the current hour → block
+    // Same day → block hour <= current hour
     if (selectedDateOnly.getTime() === todayDateOnly.getTime()) {
       return hour <= today.getHours();
     }
 
-    return false; // Safe for future dates
+    return false;
   };
 
   const handleSlotClick = (hour, value) => {
-    // 🔒 Block past slots
     if (isPastSlot(hour)) {
       alert("You cannot book a slot in the past.");
       return;
@@ -51,7 +49,6 @@ export default function BookAppointment() {
       return;
     }
 
-    // 🟢 Slot Available
     if (value === 1) {
       navigate(`/dashboard/book/${doctorId}/confirm`, {
         state: {
@@ -66,19 +63,27 @@ export default function BookAppointment() {
     try {
       const formattedDate = new Date(selectedDate).toISOString().split("T")[0];
 
-      const response = await axios.get("http://localhost:5171/api/DoctorSlots", {
-        params: { doctorId, date: formattedDate },
-      });
+      const response = await axios.get(
+        "http://localhost:5171/api/DoctorSlots",
+        { params: { doctorId, date: formattedDate } }
+      );
 
       setSlots(response.data);
+      setNoSlots(false);
+
     } catch (err) {
       console.error("Error fetching slots:", err);
+
+      if (err.response && err.response.status === 404) {
+        // 🔥 Backend returned "not found"
+        setSlots(null);
+        setNoSlots(true);
+      }
     }
   };
 
   return (
     <>
-      {/* BACK BUTTON */}
       <div className="back-btn-wrapper">
         <button className="back-btn" onClick={() => navigate("/dashboard/doctors")}>
           ← Back
@@ -88,18 +93,17 @@ export default function BookAppointment() {
       <div className="slot-wrapper">
         <h2>Booking for Doctor {doctorId}</h2>
 
-        {/* DATE PICKER */}
         <input
           type="date"
           value={selectedDate}
           onChange={(e) => {
             setSelectedDate(e.target.value);
             setSlots(null);
+            setNoSlots(false);
           }}
           className="date-picker"
         />
 
-        {/* SHOW SLOTS BUTTON */}
         <button
           onClick={fetchSlots}
           disabled={!selectedDate}
@@ -108,12 +112,17 @@ export default function BookAppointment() {
           Show Slots
         </button>
 
+        {/* ⚠️ NO SLOTS AVAILABLE */}
+        {noSlots && (
+          <p className="no-slots">No slots available for the selected date.</p>
+        )}
+
         {/* SLOT GRID */}
         {slots && (
           <div className="slot-grid">
             {Object.keys(slots.slots).map((key) => {
-              const value = slots.slots[key];
               const hour = Number(key);
+              const value = slots.slots[key];
 
               return (
                 <div

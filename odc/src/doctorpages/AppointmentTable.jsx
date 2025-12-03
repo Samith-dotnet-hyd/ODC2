@@ -1,8 +1,8 @@
 
- 
+ import { useNavigate } from "react-router-dom";
 import React, { useState } from "react";
 import styled from "styled-components";
- 
+ import { useDoctor } from "../context/DoctorContext";
 const TableWrapper = styled.div`
   background: white;
   padding: 20px;
@@ -69,7 +69,8 @@ const CloseBtn = styled.button`
  
 export default function AppointmentTable({ appointments, activeFilter }) {
   const [selected, setSelected] = useState(null);
- 
+const {docterId}= useDoctor();
+ const navigate = useNavigate();
   const filteredAppointments =
     activeFilter === "All"
       ? appointments
@@ -117,6 +118,34 @@ export default function AppointmentTable({ appointments, activeFilter }) {
   >
     Add Prescription
   </ViewButton>
+<button
+  onClick={() => navigate("/doctorvideopage",{
+      state: {
+        appointmentId: a.appointmentId,
+        patientId: a.patientId,
+        doctorId: doctorId,
+      },
+    })}
+  style={{
+    marginLeft: "8px",
+    padding: "8px 18px",
+    backgroundColor: "#22c55e",
+    color: "white",
+    border: "none",
+    borderRadius: "8px",   // same rectangle-round style
+    fontWeight: "600",
+    cursor: "pointer",
+    fontSize: "14px",
+    transition: "0.2s",
+  }}
+  onMouseOver={(e) => (e.target.style.backgroundColor = "#16a34a")}
+  onMouseOut={(e) => (e.target.style.backgroundColor = "#22c55e")}
+>
+  Call Now
+</button>
+
+
+
                   </td>
                 </tr>
               );

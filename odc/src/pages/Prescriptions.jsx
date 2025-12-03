@@ -51,7 +51,7 @@ export default function Prescriptions() {
 
         // 3️⃣ Fetch doctor details for each ID
         const doctorResponses = await Promise.all(
-          doctorIds.map((id) => api.get(`/doctor/${id}`))
+          doctorIds.map((id) => api.get(`/doctors/${id}`))
         );
 
         const map = {};

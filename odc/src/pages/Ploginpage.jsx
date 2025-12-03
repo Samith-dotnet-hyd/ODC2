@@ -9,7 +9,7 @@ export default function Login() {
   const navigate = useNavigate();
   const { login } = useAuth();               // from AuthContext
   const { setPatientId } = usePatient();     // from PatientContext
-
+  
   const [form, setForm] = useState({
     email: "",
     password: ""
@@ -65,38 +65,49 @@ const { token } = useAuth();
 //   }
 // }, [token]);
 
-  return (
-    <div className="auth-container">
-      <div className="auth-card">
-        <h2>Patient Login</h2>
+ return (
+  <div className="auth-container relative">
 
-        {error && <p className="auth-error">{error}</p>}
+    {/* BACK BUTTON */}
+    <button
+  className="absolute top-6 left-6 text-teal-600 hover:text-teal-500 transition-all"
+  onClick={() => navigate("/")}
+>
+  ← Back
+</button>
 
-        <input
-          type="email"
-          name="email"
-          placeholder="Email"
-          value={form.email}
-          onChange={handleChange}
-        />
+    <div className="auth-card">
+      <h2>Patient Login</h2>
 
-        <input
-          type="password"
-          name="password"
-          placeholder="Password"
-          value={form.password}
-          onChange={handleChange}
-        />
+      {error && <p className="auth-error">{error}</p>}
 
-        <button className="auth-btn" onClick={handleLogin}>
-          Login
-        </button>
+      <input
+        type="email"
+        name="email"
+        placeholder="Email"
+        value={form.email}
+        onChange={handleChange}
+      />
 
-        <p className="auth-switch">
-          Don't have an account?{" "}
-          <span onClick={() => navigate("/register")}>Register</span>
-        </p>
-      </div>
+      <input
+        type="password"
+        name="password"
+        placeholder="Password"
+        value={form.password}
+        onChange={handleChange}
+      />
+
+      <button className="auth-btn" onClick={handleLogin}>
+        Login
+      </button>
+
+      <p className="auth-switch">
+        Don't have an account?{" "}
+        <span onClick={() => navigate("/register")}>
+          Register
+        </span>
+      </p>
     </div>
-  );
+  </div>
+);
 }

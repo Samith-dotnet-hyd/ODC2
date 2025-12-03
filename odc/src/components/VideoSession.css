@@ -1,0 +1,110 @@
+/* Wrapper layout */
+.vs-wrapper {
+  display: flex;
+  gap: 20px;
+  padding: 20px;
+  height: 100vh;
+  box-sizing: border-box;
+  background: #f9fafb;
+}
+
+/* Left side (video area) */
+.vs-video-section {
+  flex: 2;
+  background: #1a1a1a; /* dark clean style */
+  border-radius: 12px;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+/* Loading text */
+.vs-loading {
+  text-align: center;
+  color: white;
+  font-size: 16px;
+  padding: 10px;
+}
+
+/* Jitsi container */
+.vs-jitsi-box {
+  flex: 1;
+  background: black;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+/* Control buttons bar */
+.vs-controls {
+  display: flex;
+  gap: 12px;
+  margin-top: 12px;
+  padding: 12px;
+  border-radius: 10px;
+  background: #111;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* Base button styling */
+.vs-btn {
+  padding: 8px 18px;
+  border-radius: 8px;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  color: white;
+  transition: 0.2s;
+}
+
+/* Variants */
+.vs-primary {
+  background: #2563eb;
+}
+.vs-primary:hover {
+  background: #1d4ed8;
+}
+
+.vs-danger {
+  background: #dc2626;
+}
+.vs-danger:hover {
+  background: #b91c1c;
+}
+
+.vs-secondary {
+  background: #374151;
+}
+.vs-secondary:hover {
+  background: #2c3441;
+}
+
+.vs-warning {
+  background: #eab308;
+  color: black;
+}
+.vs-warning:hover {
+  background: #c99706;
+}
+
+/* Side Panel */
+.vs-side-panel {
+  flex: 1.1;
+  background: white;
+  border-radius: 12px;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.07);
+}
+
+/* Status Box */
+.vs-status-box {
+  background: #f3f4f6;
+  padding: 12px;
+  border-radius: 8px;
+  text-align: center;
+  font-weight: 600;
+}

@@ -1,0 +1,101 @@
+.chat-box {
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 10px;
+  margin-bottom: 10px;
+  background: #fafafa;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.chat-messages {
+  flex: 1;
+  overflow-y: auto;
+  margin-bottom: 8px;
+  padding-right: 5px;
+}
+
+.chat-bubble {
+  background: #e7f1ff;
+  padding: 8px;
+  margin-bottom: 6px;
+  border-radius: 6px;
+}
+
+.chat-input {
+  display: flex;
+  gap: 10px;
+}
+
+.chat-input input {
+  flex: 1;
+  padding: 6px;
+}
+
+.upload-box {
+  margin-top: 10px;
+  display: flex;
+  gap: 8px;
+  flex-direction: column;
+}
+
+
+.video-wrapper { display:flex; height:100vh; background:#f8f8f8; }
+.video-container { flex:2; display:flex; flex-direction:column; background:#000; }
+.jitsi-area { flex:1; border-radius:8px; overflow:hidden; min-height:420px; }
+.video-buttons { display:flex; justify-content:center; padding:10px; background:#111; }
+.record-btn { background:#ff3b30; color:white; border:none; padding:10px 16px; border-radius:6px; cursor:pointer; }
+.control-btn { margin-right:8px; padding:8px 12px; border-radius:6px; cursor:pointer; }
+.side-panel { flex:1; display:flex; flex-direction:column; background:white; padding:10px; border-left:1px solid #ddd; }
+@media (max-width:900px) { .video-wrapper{ flex-direction:column; } .side-panel{ height:300px; border-left:none; border-top:1px solid #ddd; } }
+.loading-text { color:#fff; padding:12px; text-align:center; }
+
+.chat-box {
+  background: white;
+  border-radius: 18px;
+  padding: 15px;
+  height: 55%;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+}
+
+.chat-box h4 {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.chat-messages {
+  flex: 1;
+  overflow-y: auto;
+  padding-right: 10px;
+}
+
+.chat-bubble {
+  background: #eef1f7;
+  padding: 8px 12px;
+  border-radius: 12px;
+  margin-bottom: 8px;
+}
+
+.chat-input {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.chat-input input {
+  flex: 1;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+}
+
+.chat-input button {
+  background: #1976d2;
+  border: none;
+  padding: 10px 14px;
+  color: white;
+  border-radius: 10px;
+}

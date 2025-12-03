@@ -12,7 +12,7 @@ export default function Appointment() {
   const doctorId = doctor?.doctorId;
  
   // Extra filters
-  const [date, setDate] = useState("2025-02-12 09:00:00.0000000");
+  const [date, setDate] = useState("2025-12-04 10:30:00.0000000");
   const [timezone, setTimezone] = useState("UTC");
  
   const fetchAppointments = async () => {
