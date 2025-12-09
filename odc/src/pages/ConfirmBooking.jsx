@@ -135,7 +135,13 @@ const [success, setSuccess] = useState(false);
   if (!slot || !date) return <h2>Invalid booking details</h2>;
 const slotTime = slot.toString().padStart(2, "0");   // ensure 09 format
 
-const appointmentDateTime = new Date(`${date}T${slotTime}:00:00`).toISOString();
+// const appointmentDateTime = new Date(`${date}T${slotTime}:00:00`).toISOString();
+const baseDate = new Date(`${date}T${slotTime}:00:00`);
+
+baseDate.setHours(baseDate.getHours() + 5);
+baseDate.setMinutes(baseDate.getMinutes() + 30);
+
+const appointmentDateTime = baseDate.toISOString();
 
 //   const appointmentDateTime = `${date}T${slot}:00`;
 
@@ -262,7 +268,7 @@ await api.post(
     params: { doctorId: Number(doctorId) } 
   }
 );
-
+console.log(appointmentDateTime);
 // 3️⃣ Create Appointment (via Ocelot)
 const appointmentRes = await api.post(
   "/appointments/create",

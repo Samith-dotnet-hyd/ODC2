@@ -3,7 +3,7 @@ import { usePatient } from "../context/PatientContext";
 import { useEffect, useState } from "react";
 import api from "../api";
 import "./AppointmentDetails.css";
-
+import axios from "axios";
 export default function AppointmentDetails() {
   const { appointmentId } = useParams();
   const navigate = useNavigate();

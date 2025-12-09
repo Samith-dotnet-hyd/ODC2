@@ -117,7 +117,14 @@ const App = () => {
     </ProtectedRoute>
   }
 />
-
+{/* <Route
+  path="/dashboard/book"
+  element={
+    <ProtectedRoute role="patient">
+      <AppointmentDetails />
+    </ProtectedRoute>
+  }
+/> */}
 <Route
   path="/dashboard/prescriptions"
   element={

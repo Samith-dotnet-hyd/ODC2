@@ -11,7 +11,7 @@ import ChatBox from "./ChatBox";
 import RecordingButton from "./RecordingButton";
 import PrescriptionUpload from "./PrescriptionUpload";
 import PrescriptionForm from "./PrescriptionForm";
-
+import api from "../api";
 // import "../styles/video.css";
 
 export default function VideoSession({
@@ -194,8 +194,39 @@ const navigate = useNavigate();
     } catch (err) {}
 
     setStatus("Ended");
+    handleMarkCompleted();
     navigate("/dashboard");
   };
+const handleMarkCompleted = async () => {
+  const confirmDone = window.confirm("Mark this appointment as Completed?");
+  if (!confirmDone) return;
+
+  try {
+    // 1️⃣ Fetch the appointment first
+    const apptRes = await api.get(`/appointments/${appointmentId}`);
+    const currentAppointment = apptRes.data;
+
+    if (!currentAppointment) {
+      alert("Appointment not found.");
+      return;
+    }
+
+    // 2️⃣ Update to Completed
+    await api.put(`/appointments/update/${appointmentId}`, {
+      status: "Completed",
+      notes: currentAppointment.notes || "Marked as completed"
+    });
+
+    alert("Appointment marked as Completed!");
+
+    // 3️⃣ Refresh dashboard
+    navigate("/dashboard");
+
+  } catch (err) {
+    console.error("Complete update error:", err);
+    alert("Failed to mark as completed");
+  }
+};
 
   // -------------------------------
   // SEND CHAT

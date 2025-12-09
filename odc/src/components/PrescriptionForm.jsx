@@ -34,7 +34,7 @@ export default function PrescriptionForm({ appointmentId, patientId, doctorId, o
 
       // SEND EMAIL TO PATIENT
       await notificationApi.sendEmail({
-        toEmail: "kanugantisuraj3"+ "@gmail.com",  // ← replace with actual email
+        toEmail: "samithreddykandala"+ "@gmail.com",  // ← replace with actual email
         toPhone:"9999999999",
         subject: "Your Prescription is Ready",
         message: `Your prescription is ready. View it here:\n${res.data.pdfUrl}`

@@ -5,6 +5,11 @@ import DoctorProfile from "./DoctorProfile";
 
 const Body = styled.div`
   padding: 20px;
+   min-height: 100vh;
+  background-image:url("src/assets/image.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 `;
 
 export default function DoctorDashboard() {

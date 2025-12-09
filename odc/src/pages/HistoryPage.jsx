@@ -24,7 +24,7 @@ export default function HistoryPage() {
               return (
                 <div key={index} className="history-row">
                   <div>
-                    <strong>Doctor #{appt.doctorId}</strong>
+                    <strong>Appointment Id {appt.appointmentId}</strong>
                     <p>Status: {appt.status}</p>
                     <p>Notes: {appt.notes}</p>
                   </div>
